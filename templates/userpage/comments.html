@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="my-4 mx-4 container">
+<form method="GET">
+  <div class="form-group row">
+    <label for="comment_text" class="col-sm-2 col-form-label">Comment</label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control" id="comment_text" name="comment">
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary">Done</button>
+</form>
+</div>
+
+<div class="container my-4 mx-4">
+<div class="card">
+  <div class="card-header">
+    Username
+  </div>
+  <div class="card-body">
+    <blockquote class="blockquote mb-0">
+      <p>Comment</p>
+      <footer class="blockquote-footer">Duration<cite title="Source Title">Source Title</cite></footer>
+    </blockquote>
+  </div>
+</div>
+</div>
+{% endblock body %}
