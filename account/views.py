@@ -2,6 +2,11 @@ from django.shortcuts import render, HttpResponse, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from django.views.generic import TemplateView
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm
+
+
 # Create your views here.
 
 def home(request):
@@ -48,4 +53,28 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     messages.success(request, "logged out")
-    return redirect('/')
+    return redirect("/")
+
+class Change_Password(TemplateView):
+    template_name = "account/password_change.html"
+
+    def post(self, request):
+        form = PasswordChangeForm(data = request.POST, user = request.user)
+        if form.is_valid():
+            form.save()
+            update_session_auth_hash(request, user = request.user)
+            messages.success(request, "Password Changed Successfully")
+            return redirect("/")
+        else:
+            for err in form.errors.values():
+                messages.error(request, err)
+            return redirect("/change_password")
+
+    #/*p ; {  * P " : _ [*/
+
+    def get(self, request):
+        form = PasswordChangeForm(user = request.user)
+        return render(request, self.template_name, {"form":form})
+
+
+    #/*p ; {  * P " : _ [*/

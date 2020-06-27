@@ -1,21 +1,11 @@
 {% extends 'base.html' %}
 {% load static %}
 
-
-{% block head_content %}
-<link rel="stylesheet" href="{% static 'userpage/zuck.js-master/demo/style.css' %}">
-
-<!-- lib styles -->
-<link rel="stylesheet" href="{% static 'userpage/zuck.js-master/dist/zuck.min.css' %}">
-
-<!-- lib skins -->
-<link rel="stylesheet" href="{% static 'userpage/zuck.js-master/dist/skins/snapgram.css' %}">
-{% endblock head_content %}
-
 {% block nav_btn1 %}
-    <button type="button" class="btn btn-outline-primary ml-4" data-toggle="modal" data-target="#PostModal">
-      Post
-    </button>
+<button type="button" class="btn btn-outline-primary ml-4" data-toggle="modal" data-target="#PostModal">
+    Post
+</button>
+
 {% endblock nav_btn1 %}
 
 {% block css %}
@@ -48,15 +38,15 @@
     <div class="card-body">
       <p class="card-text">{{i.caption}}</p>
       {% if i.image %}
-      <img src="{{i.image.url}}" alt="Image" id='post_img'>
+        <img src="{{i.image.url}}" alt="Image" id='post_img'>
       {% endif %}
       <hr size='30px'>
 
       <button class="btn btn-light mr-3 like" id="{{ i.id }}">
         {% if i in liked_post %}
-        <a href="{% url 'like_dislike_post' %}" style="color:red;" id="likebtn{{ i.id }}"> Liked </a>
+            <a href="{% url 'like_dislike_post' %}" style="color:red;" id="likebtn{{ i.id }}"> Liked </a>
         {% else %}
-        <a href="{% url 'like_dislike_post' %}" style="color:red;" id="likebtn{{ i.id }}"> Like </a>
+            <a href="{% url 'like_dislike_post' %}" style="color:red;" id="likebtn{{ i.id }}"> Like </a>
         {% endif %}
       </button>
 
@@ -104,52 +94,16 @@
   </div>
 </div>
 
-
-
 {% endblock modals %}
 
 {% block js %}
 <script>
-  $(".delete").click(function (e) {
-    var id = this.id;
-    var href = this.href;
-    console.log(href, id) // get href from link
-    e.preventDefault(); // don't follow the link
-
-    $.ajax({
-      url: href,
-      data: {},
-    });
-
-    $("#" + id).fadeOut(1000);
-
-  });
-
-  $(".like").click(function (e) {
-    var id = this.id; //$(this).attr('id');
-    var href = $('.like').find('a').attr('href');
-    console.log(href, id) // get href from link
-    e.preventDefault(); // don't follow the link
-
-    $.ajax({
-        url: href,
-        data: {
-          'likeId': id
-        },
-        success: function(response){
-          if(response.liked){
-            $('#likebtn' + id).html("Liked");
-          }
-          else{
-            $('#likebtn' + id).html("Like");
-          }
-        }
-      })
-  });
-  /* p ; {  * " :  [*/
+  /*p ; {  * " :  [*/
 </script>
 
-<script src="{% static 'userpage/zuck.js-master/dist/zuck.min.js' %}"></script>
-<script src="{% static 'userpage/zuck.js-master/demo/script.js' %}"></script>
+<script src="{% static 'userpage/js/delete.js' %}"></script>
+<script src="{% static 'userpage/js/like.js' %}"></script>
+
+
 
 {% endblock js %}

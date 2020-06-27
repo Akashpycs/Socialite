@@ -1,7 +1,9 @@
 from django.contrib import admin
 from django.urls import path, include
 from . import views
-from .views import Search_User
+from .views import Search_User, EditProfile
+
+app_name = 'userpage'
 
 urlpatterns = [
     path('', views.userHome, name='userHome'),
@@ -12,5 +14,6 @@ urlpatterns = [
     path("slug/comment", views.comment, name='comment'),
     path("user/follow/<str:username>", views.follow, name="follow"),
     path("search/", Search_User.as_view(), name="search_user"),
+    path("<str:username>/edit", EditProfile.as_view(), name="editprofile"),
 
 ]

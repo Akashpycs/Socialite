@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponse, redirect
+from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.models import User
 from .models import Post, Profile, Like, Following
@@ -6,6 +6,9 @@ from django.conf import settings
 import json
 from django.core.paginator import Paginator
 from django.views.generic import ListView
+from django.views import View
+from django.http import HttpResponseRedirect, HttpResponse
+from django.urls import reverse
 
 def userHome(request):
     #fetching post from database
@@ -133,4 +136,15 @@ class Search_User(ListView):
         username = self.request.GET.get("username", None)
         queryset = User.objects.filter(username__icontains = username)
         return queryset
+
+class EditProfile(View):
+    def post(self, request, *args, **kwargs):
+        profile_obj = Profile.objects.get(user = request.user)
+        bio = request.POST.get("Bio", "")
+        img = request.FILES.get("image", "")
+        if bio: profile_obj.bio = bio
+        if img: profile_obj.userImage = img
+        profile_obj.save()
+        
+        return HttpResponseRedirect(reverse("userpage:userprofile", args=(request.user.username,)))
 # P _ { : ; p [ "

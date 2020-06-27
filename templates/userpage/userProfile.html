@@ -27,15 +27,14 @@ hr
 border-top: 2px solid #000000;
 }
 
-#follow{
+#follow, #edit{
     color:blue;
 }
 
-#follow:hover{
+#follow:hover, #edit:hover{
     color:white;
 }
 {% endblock css %}
-
 
 
 {% block body %}
@@ -45,9 +44,13 @@ border-top: 2px solid #000000;
         <img src="{{userImg.url}}" class="align-self-start mr-3 userImage" alt="...">
         <div class="media-body info">
             <h4 class="mt-0">{{user_obj.username}}
-                {% if connection and not request.user == user_obj %}
+                {% if request.user == user_obj %}
+                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#EditModal">
+                    Edit
+                </button>
+                {% elif connection %}
                 <a type="button" class="btn btn-outline-primary" id="follow" role="button" href="{% url 'follow' user_obj.username %}">Unfollow</a>
-                {% elif not connection and not request.user == user_obj %}
+                {% elif not connection %}
                 <a type="button" class="btn btn-outline-primary" id="follow" role="button" href="{% url 'follow' user_obj.username %}">Follow</a>
                 {% endif %}
             </h4>
@@ -71,6 +74,37 @@ border-top: 2px solid #000000;
 
 {% endblock body %}
 
+{% block modals %}
+<div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="EditModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="EditModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <form action="{{ request.user }}/edit" method="post"  enctype="multipart/form-data">
+               {% csrf_token %}
+            <div class="form-group">
+              <label for="BioInput">Bio</label>
+              <input type="text" class="form-control" id="BioInput" name="Bio">
+              <br>
+              <label for="image">Image : </label>
+              <br>
+              <input type="file" name="image" id="image">
+            </div>
+      </div>
+      <div class="modal-footer">
+
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Change</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock modals %}
 
 {% block js %}
 <script type="text/javascript">

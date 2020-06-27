@@ -17,7 +17,7 @@
 </head>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
 {% if request.user  %}
-  <a class="navbar-brand" href="">{{request.user}}</a>
+  <a class="navbar-brand" href="/userpage/{{request.user}}">{{request.user}}</a>
 {% else %}
   <a class="navbar-brand" href="">Socialite</a>
 {% endif %}
@@ -35,11 +35,9 @@
           aria-haspopup="true" aria-expanded="false">
           Dropdown
         </a>
-      </li>
-
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" href="/change_password">change password</a>
+          <a class="dropdown-item" href="/logout">Logout</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="#">Something else here</a>
         </div>

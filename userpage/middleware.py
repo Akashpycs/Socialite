@@ -17,7 +17,7 @@ class LoginRequiredMiddleware:
         authenticated = request.user.is_authenticated
         url = request.path
         if authenticated and url == settings.HOME_URL:
-            logout(request)
+            return redirect("/userpage")
 
         if not authenticated and (url != settings.HOME_URL and url not in settings.EXEMPT_URLS):
             return redirect(settings.HOME_URL)

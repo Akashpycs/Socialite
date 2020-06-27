@@ -15,22 +15,22 @@
         {% csrf_token %}
         <div class="form-group my-4">
             <label for="email">Email address</label>
-            <input type="email" class="form-control" id="email" placeholder="name@example.com" name='email'>
+            <input type="email" class="form-control" id="mail" placeholder="name@example.com" name='email' required>
         </div>
 
         <div class="form-group my-4">
             <label for="name">Name</label>
-            <input type="text" class="form-control" id="name" placeholder="Your Name Here" name='name'>
+            <input type="text" class="form-control" id="name" placeholder="Your Name Here" name='name' required>
         </div>
 
         <div class="form-group my-4">
             <label for="username">Username</label>
-            <input type="text" class="form-control" id="username" placeholder="Your Username here" name='username'>
+            <input type="text" class="form-control" id="username" placeholder="Your Username here" name='username' required>
         </div>
 
         <div class="form-group my-4">
             <label for="Password">Password</label>
-            <input type="password" class="form-control" id="Password" placeholder="Create a Password" name='password'>
+            <input type="password" class="form-control" id="Password" placeholder="Create a Password" name='password' required>
         </div>
 
         <div class="form-group my-4">
@@ -61,7 +61,7 @@
         {% csrf_token %}
             <div class="form-group">
                 <label for="username">Email address</label>
-                <input type="text" class="form-control" id="username" aria-describedby="emailHelp" placeholder="Enter your Username" required name='username'>
+                <input type="text" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter your Username" required name='username'>
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
