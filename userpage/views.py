@@ -32,10 +32,10 @@ def post(request):
         post_obj = Post(user=user_, caption=captions_, image=image_)
         post_obj.save()
         messages.success(request, "We Showed Them!!!")
-        return redirect('/userpage')
+        return redirect('/')
     else:
         messages.error(request, "Something went Wrong :(")
-        return redirect('/userpage')
+        return redirect('/')
 
 
 def delPost(request, ID):
@@ -131,10 +131,10 @@ def follow(request, username):
 class Search_User(ListView):
     model = User
     template_name = "userpage/searchUser.html"
-    paginate_by = 2 #page_obj
+    paginate_by = 5 #page_obj
     def get_queryset(self):
         username = self.request.GET.get("username", None)
-        queryset = User.objects.filter(username__icontains = username)
+        queryset = User.objects.filter(username__icontains = username).order_by('-id')
         return queryset
 
 class EditProfile(View):
@@ -145,6 +145,6 @@ class EditProfile(View):
         if bio: profile_obj.bio = bio
         if img: profile_obj.userImage = img
         profile_obj.save()
-        
-        return HttpResponseRedirect(reverse("userpage:userprofile", args=(request.user.username,)))
+
+        return HttpResponseRedirect(reverse("userpage:user_profile", args=(request.user.username,)))
 # P _ { : ; p [ "

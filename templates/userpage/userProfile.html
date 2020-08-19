@@ -49,9 +49,9 @@ border-top: 2px solid #000000;
                     Edit
                 </button>
                 {% elif connection %}
-                <a type="button" class="btn btn-outline-primary" id="follow" role="button" href="{% url 'follow' user_obj.username %}">Unfollow</a>
+                <a type="button" class="btn btn-outline-primary" id="follow" role="button" href="{% url 'userpage:follow' user_obj.username %}">Unfollow</a>
                 {% elif not connection %}
-                <a type="button" class="btn btn-outline-primary" id="follow" role="button" href="{% url 'follow' user_obj.username %}">Follow</a>
+                <a type="button" class="btn btn-outline-primary" id="follow" role="button" href="{% url 'userpage:follow' user_obj.username %}">Follow</a>
                 {% endif %}
             </h4>
             <p>Follower : {{follower}} Following : {{following}}</p>

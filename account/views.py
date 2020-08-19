@@ -70,8 +70,6 @@ class Change_Password(TemplateView):
                 messages.error(request, err)
             return redirect("/change_password")
 
-    #/*p ; {  * P " : _ [*/
-
     def get(self, request):
         form = PasswordChangeForm(user = request.user)
         return render(request, self.template_name, {"form":form})

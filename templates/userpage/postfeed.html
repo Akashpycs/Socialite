@@ -10,14 +10,12 @@
 
 {% block css %}
 
-    #post_img
-    {
+    #post_img{
         width:460;
         heigt:360;
     }
 
-    .post_div
-    {
+    .post_div{
         width:535px;
     }
 
@@ -32,7 +30,7 @@
 <div class='container my-4 post_div' id="{{ i.id }}">
   <div class="card">
     <h5 class="card-header">
-      <a href="{% url 'userprofile' i.user %}" style="color:black;">{{i.user}}</a>
+      <a href="{% url 'userpage:user_profile' i.user %}" style="color:black;">{{i.user}}</a>
       <small>{{i.date.date}}</small>
     </h5>
     <div class="card-body">
@@ -44,17 +42,17 @@
 
       <button class="btn btn-light mr-3 like" id="{{ i.id }}">
         {% if i in liked_post %}
-            <a href="{% url 'like_dislike_post' %}" style="color:red;" id="likebtn{{ i.id }}"> Liked </a>
+            <a href="{% url 'userpage:like_dislike_post' %}" style="color:red;" id="likebtn{{ i.id }}"> Liked </a>
         {% else %}
-            <a href="{% url 'like_dislike_post' %}" style="color:red;" id="likebtn{{ i.id }}"> Like </a>
+            <a href="{% url 'userpage:like_dislike_post' %}" style="color:red;" id="likebtn{{ i.id }}"> Like </a>
         {% endif %}
       </button>
 
-      <a role = "button" class="btn btn-warning mx-2" href = {% url 'comment' %}>Comment</a>
+      <a role = "button" class="btn btn-warning mx-2" href = "{% url 'userpage:comment' %}" >Comment</a>
 
       <button  class="btn btn-info mx-4" > Repost </button>
       {% if request.user == i.user %}
-      <a class="btn btn-danger ml-4 delete" href="{% url 'delpost' i.id %}" id="{{ i.id }}">Delete</a>
+      <a class="btn btn-danger ml-4 delete" href="{% url 'userpage:delpost' i.id %}" id="{{ i.id }}">Delete</a>
       {% endif %}
     </div>
   </div>
@@ -84,7 +82,7 @@
           <br><br><br>
           <label for="captions">Captions : </label>
           <br>
-          <textarea name="captions" id="captions" cols="55" rows="10" placeholder="Oohlala..." class='ml-4'></textarea>
+          <textarea name="captions" id="captions" cols="45" rows="10" placeholder="Oohlala..." class='ml-4'></textarea>
           <hr size='30'>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           <button type="submit" class="btn btn-primary">Let's Show</button>
@@ -94,16 +92,14 @@
   </div>
 </div>
 
+
+
+
 {% endblock modals %}
 
 {% block js %}
-<script>
-  /*p ; {  * " :  [*/
-</script>
 
 <script src="{% static 'userpage/js/delete.js' %}"></script>
 <script src="{% static 'userpage/js/like.js' %}"></script>
-
-
 
 {% endblock js %}

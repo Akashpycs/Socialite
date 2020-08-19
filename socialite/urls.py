@@ -20,7 +20,6 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('account.urls'), name='account_app'),
-    path('userpage/', include('userpage.urls'), name='userpage'),
-    path('story/', include('story.urls'), name='story'),
+    path('userpage/', include('userpage.urls', namespace='userpage')),
 
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)

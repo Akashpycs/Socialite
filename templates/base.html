@@ -17,9 +17,9 @@
 </head>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
 {% if request.user  %}
-  <a class="navbar-brand" href="/userpage/{{request.user}}">{{request.user}}</a>
+  <a class="navbar-brand" href="#">{{request.user}}</a>
 {% else %}
-  <a class="navbar-brand" href="">Socialite</a>
+  <a class="navbar-brand" href="#">Socialite</a>
 {% endif %}
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

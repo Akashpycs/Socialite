@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'account.apps.AccountConfig',
     'userpage.apps.UserpageConfig',
-    'story.apps.StoryConfig',
 ]
 
 MIDDLEWARE = [
@@ -132,8 +131,8 @@ STATICFILES_DIRS = [
 
 MESSAGE_TAGS = {constants.ERROR : 'danger'}
 
-MEDIA_URL  = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, "content/")
+MEDIA_URL  = '/content/'
+MEDIA_ROOT = os.path.join(BASE_DIR, "content")
 
 HOME_URL = "/"
 
