@@ -40,6 +40,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'account.apps.AccountConfig',
     'userpage.apps.UserpageConfig',
+    'comment',  # app
+    'mptt',
+    'crispy_forms',
+
 ]
 
 MIDDLEWARE = [
@@ -129,9 +133,9 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static/')
 ]
 
-MESSAGE_TAGS = {constants.ERROR : 'danger'}
+MESSAGE_TAGS = {constants.ERROR: 'danger'}
 
-MEDIA_URL  = '/content/'
+MEDIA_URL = '/content/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "content")
 
 HOME_URL = "/"
